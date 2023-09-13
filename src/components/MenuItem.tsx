@@ -7,7 +7,7 @@ type MenuProps = {
   Icon: IconType;
 };
 
-export default function MenuItem({ title, address, Icon }: MenuProps) {
+export function MenuItem({ title, address, Icon }: MenuProps) {
   return (
     <div>
       <Link href={address} className="mx-4 lg:mx-6 hover:text-amber-600">

@@ -1,9 +1,8 @@
-import Header from "@/components/Header";
-import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Header } from "@/components";
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "IMDB",
@@ -17,14 +16,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {/* header */}
-        <Header />
-        {/* navbar */}
+      <body>
+        <Providers>
+          {/* header */}
+          <Header />
+          {/* navbar */}
 
-        {/* searchbox */}
+          {/* searchbox */}
 
-        {children}
+          {children}
+        </Providers>
       </body>
     </html>
   );
