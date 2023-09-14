@@ -1,9 +1,24 @@
-import Image from "next/image";
+import { Results } from "@/components";
 
-export default function Home() {
+import { Result } from "@/types/backendDataTypes";
+
+type HomeProps = {
+  searchParams: { genre: string };
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const genre = searchParams.genre || "fetchTrending";
+  const res = await fetch(
+    `https://api.themoviedb.org/3/${
+      genre === "fetchTopRated" ? "movie/top_rated" : "trending/all/week"
+    }?api_key=${process.env.API_KEY}&language=en-US&page=1`,
+    { next: { revalidate: 10000 } }
+  );
+  const { results }: { results: Result[] } = await res.json();
+
   return (
     <div>
-      <h1>home</h1>
+      <Results results={results} />
     </div>
   );
 }
