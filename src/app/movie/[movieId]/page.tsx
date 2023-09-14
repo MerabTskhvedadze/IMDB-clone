@@ -1,24 +1,19 @@
-import { Result } from "@/types/backendDataTypes";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-async function getMovie(movieId: string | number) {
+async function getMovie(movieId: string) {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?aip_key=${process.env.API_KEY}`
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`
   );
   return await res.json();
 }
 
-export default async function Movie({ params }: any) {
-  const router = useRouter();
-
+export default async function MoviePage({
+  params,
+}: {
+  params: { movieId: string };
+}) {
   const movieId = params.movieId;
-  const movie: Result = await getMovie(movieId);
-
-  if (!movie) {
-    router.push("/");
-    return;
-  }
+  const movie = await getMovie(movieId);
   return (
     <div className="w-full">
       <div className="p-4 md:pt-8 flex flex-col md:flex-row items-center content-center max-w-6xl mx-auto md:space-x-6">
