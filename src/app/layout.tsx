@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import { Header } from "@/components";
 import Providers from "./providers";
+
+import type { Metadata } from "next";
+import { Header, Navbar } from "@/components";
 
 import "./globals.css";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
           {/* header */}
           <Header />
           {/* navbar */}
+          <Navbar />
 
           {/* searchbox */}
 
